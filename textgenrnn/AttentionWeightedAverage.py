@@ -31,6 +31,8 @@ class AttentionWeightedAverage(Layer):
         # uses 'max trick' for numerical stability
         # reshape is done to avoid issue with Tensorflow
         # and 1-dimensional weights
+        if isinstance(x, list):
+            x = x[0]
         logits = K.dot(x, self.W)
         x_shape = K.shape(x)
         logits = K.reshape(logits, (x_shape[0], x_shape[1]))
